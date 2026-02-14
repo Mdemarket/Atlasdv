@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas DV</title>
+
+<!-- Fonte estilosa do Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* Reset e corpo */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Playfair Display', serif; background:white; color:black; scroll-behavior:smooth; line-height:1.6; }
+
+/* Header fixo */
+header {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  z-index:1000;
+}
+
+header img { height:60px; }
+
+/* Menu hambúrguer */
+.menu-toggle {
+  font-size:30px;
+  cursor:pointer;
+  user-select:none;
+  transition: transform 0.3s ease;
+}
+.menu-toggle:hover { transform:rotate(90deg); }
+
+/* Menu lateral */
+nav {
+  position:fixed;
+  top:0;
+  left:-300px;
+  width:300px;
+  height:100%;
+  background:white;
+  box-shadow:2px 0 10px rgba(0,0,0,0.15);
+  padding-top:100px;
+  transition: left 0.3s ease;
+  z-index:999;
+}
+
+nav ul { list-style:none; }
+nav ul li { padding:20px 30px; border-bottom:1px solid #ddd; }
+nav ul li a { text-decoration:none; color:black; font-weight:bold; font-style:italic; font-size:18px; display:block; transition: color 0.3s; }
+nav ul li a:hover { color:#0D1B44; }
+
+/* Menu ativo */
+nav.show { left:0; }
+
+/* Seções */
+section {
+  padding:120px 30px 60px;
+  max-width:1000px;
+  margin:0 auto;
+}
+
+/* Gradientes de texto */
+.gradient-azulpreto {
+  font-style:italic;
+  background: linear-gradient(45deg, #0D1B44, #000000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom:15px;
+}
+
+.gradient-ciano { color:#00FFFF; font-style:italic; text-align:center; }
+
+.gradient-cinza {
+  font-style:italic;
+  background: linear-gradient(90deg, #555555, #CCCCCC);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom:15px;
+}
+
+/* Títulos */
+h1,h2 { font-size:2.5em; margin-bottom:20px; text-align:center; }
+
+/* Botões */
+.btn {
+  display:inline-block;
+  padding:12px 25px;
+  margin:10px 5px;
+  border:none;
+  border-radius:8px;
+  color:white;
+  font-weight:bold;
+  font-style:italic;
+  text-decoration:none;
+  cursor:pointer;
+  transition: all 0.3s ease;
+}
+.youtube { background:red; }
+.youtube:hover { background:#b20000; transform:scale(1.05); }
+.discord { background:purple; }
+.discord:hover { background:#6600aa; transform:scale(1.05); }
+.email { background:black; }
+.email:hover { background:#333; transform:scale(1.05); }
+.apoie { background: linear-gradient(45deg, #006400, #00FF7F); color:white; }
+.apoie:hover { transform:scale(1.05); }
+
+/* Lista de projetos */
+#projetos ul { list-style:disc; padding-left:20px; }
+
+/* Responsividade */
+@media(max-width:768px){
+  header { padding:10px 20px; }
+  nav { width:80%; }
+  h1,h2 { font-size:2em; }
+  .btn { padding:10px 18px; font-size:14px; }
+}
+
+/* Scroll suave para links internos */
+a[href^="#"] { cursor:pointer; }
+
+/* Efeito fade-in ao rolar */
+.fade-in { opacity:0; transform:translateY(30px); transition: all 0.8s ease; }
+.fade-in.show { opacity:1; transform:translateY(0); }
+
+/* Fundo animado sutil */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg, rgba(13,27,68,0.05), rgba(0,0,0,0.05));
+  pointer-events:none;
+  z-index:-1;
+  animation: bgMove 30s linear infinite;
+}
+
+@keyframes bgMove{
+  0%{background-position:0 0;}
+  100%{background-position:100% 100%;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="https://i.postimg.cc/hj47FNjv/atlasdv.png" alt="Atlas DV Logo">
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</header>
+
+<nav id="menu">
+  <ul>
+    <li><a href="#inicial">Inicial</a></li>
+    <li><a href="#sobre">Sobre Nós</a></li>
+    <li><a href="#apoie">Apoie-nos</a></li>
+    <li><a href="#projetos">Nossos Projetos</a></li>
+  </ul>
+</nav>
+
+<section id="inicial" class="fade-in">
+  <h1 class="gradient-azulpreto">Bem-vindo à Atlas DV</h1>
+  <p class="gradient-azulpreto">
+    A Atlas DV é uma desenvolvedora independente dedicada a criar experiências digitais únicas. Nosso foco é transformar ideias em projetos interativos, desde jogos até aplicações web inovadoras, sempre com qualidade, criatividade e atenção aos detalhes.
+  </p>
+  <p class="gradient-azulpreto">
+    Explore nosso portfólio, conheça nossos projetos e acompanhe nossas novidades. Aqui, cada pixel conta e cada código tem propósito.
+  </p>
+</section>
+
+<section id="sobre" class="fade-in">
+  <h2 class="gradient-azulpreto">Sobre Nós</h2>
+  <p class="gradient-azulpreto">
+    A Atlas DV foi criada com o objetivo de dar visibilidade à indústria de games e plataformas independentes em regiões e países fora do eixo dos grandes centros tecnológicos. Nosso propósito é apoiar desenvolvedores e projetos que muitas vezes não têm acesso aos recursos ou ao reconhecimento que merecem.
+  </p>
+  <p class="gradient-azulpreto">
+    Fundada por Antônio Filho, natural de Belém, no Pará, a Atlas DV busca transformar ideias em experiências digitais inovadoras, promovendo criatividade, inclusão e desenvolvimento tecnológico em comunidades menos favorecidas.
+  </p>
+  <h3>Redes Sociais</h3>
+  <a href="https://youtube.com/@atlas-dv?si=lklqqwC4KBEpjvWK" target="_blank" class="btn youtube">YouTube</a>
+  <a href="https://discord.gg/STrHtum8sM" target="_blank" class="btn discord">Discord</a>
+  <a href="mailto:Atlas.dv.devgroup@gmail.com" class="btn email">E-Mail</a>
+  <p style="margin-top:10px;">De segunda a sexta, das 13h às 20h (horário de Brasília)</p>
+</section>
+
+<section id="apoie" class="fade-in">
+  <h2>💖 Apoie a Atlas DV</h2>
+  <p class="gradient-ciano">
+    Se você curte a nossa missão de dar visibilidade pra games e projetos indie, mesmo em lugares que ninguém olha, pode dar uma força com só <strong>R$5 💸</strong>
+  </p>
+  <p class="gradient-ciano">
+    Cada contribuição ajuda a manter a Atlas DV ativa, criando coisas novas e apoiando talentos 🎮✨
+  </p>
+  <a href="https://mpago.la/1sJ4GRL" target="_blank" class="btn apoie">Apoiar</a>
+</section>
+
+<section id="projetos" class="fade-in">
+  <h2 class="gradient-azulpreto">Nossos Projetos</h2>
+  <p class="gradient-azulpreto">A Atlas DV, atualmente apenas está desenvolvendo 2 projetos, 1 plataforma, e 1 jogo:</p>
+  <ul>
+    <li><strong style="color:purple;">Leep_p</strong> • Uma Plataforma de conversas, a o qual tem 2 camadas de proteção, perfeita para conversas particulares, e aquele grupo sagrado de amigos (Lilás)</li>
+    <li><strong class="gradient-cinza">Tonny</strong> • Um jogo 2D Monster tame roguelike, que se passa num mundo devastado após uma guerra nuclear global pelo urânio no México. A humanidade quase foi extinta, restando apenas a sociedade do bunker Santa Fé, planejado para durar 100 anos. O jogador assume o protagonista, explorando a superfície e lidando com criaturas modificadas. O jogo combina estratégia, sobrevivência e gerenciamento de monstros, com ecossistema dinâmico e combates por turnos, focando em domesticação e exploração. Atualmente contém 50 espécies diferentes, catalogadas.</li>
+  </ul>
+</section>
+
+<script>
+function toggleMenu(){
+  document.getElementById('menu').classList.toggle('show');
+}
+
+/* Fade-in ao rolar */
+const faders = document.querySelectorAll('.fade-in');
+window.addEventListener('scroll', () => {
+  faders.forEach(f => {
+    const rect = f.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100){
+      f.classList.add('show');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
