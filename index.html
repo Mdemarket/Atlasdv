@@ -1,232 +1,235 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atlas DV</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas DV | Engenharia de Experiências</title>
 
-<!-- Fonte estilosa do Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-<style>
-/* Reset e corpo */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Playfair Display', serif; background:white; color:black; scroll-behavior:smooth; line-height:1.6; }
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --bg-dark: #020205;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #f0f0f0;
+            --text-dim: #b0b0b0;
+        }
 
-/* Header fixo */
-header {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 30px;
-  background:white;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
-  z-index:1000;
-}
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg-dark); 
+            color: var(--text-main); 
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
 
-header img { height:60px; }
+        /* Fundo com profundidade */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 10%, #0d1b44 0%, #020205 50%);
+            z-index: -2;
+        }
 
-/* Menu hambúrguer */
-.menu-toggle {
-  font-size:30px;
-  cursor:pointer;
-  user-select:none;
-  transition: transform 0.3s ease;
-}
-.menu-toggle:hover { transform:rotate(90deg); }
+        /* Header Robusto */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 8%;
+            background: rgba(2, 2, 5, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            z-index: 1000;
+        }
 
-/* Menu lateral */
-nav {
-  position:fixed;
-  top:0;
-  left:-300px;
-  width:300px;
-  height:100%;
-  background:white;
-  box-shadow:2px 0 10px rgba(0,0,0,0.15);
-  padding-top:100px;
-  transition: left 0.3s ease;
-  z-index:999;
-}
+        header img { height: 70px; transition: 0.3s; }
+        header img:hover { filter: drop-shadow(0 0 15px var(--primary)); }
 
-nav ul { list-style:none; }
-nav ul li { padding:20px 30px; border-bottom:1px solid #ddd; }
-nav ul li a { text-decoration:none; color:black; font-weight:bold; font-style:italic; font-size:18px; display:block; transition: color 0.3s; }
-nav ul li a:hover { color:#0D1B44; }
+        .menu-toggle {
+            font-size: 35px; color: var(--primary);
+            cursor: pointer; transition: 0.3s;
+        }
 
-/* Menu ativo */
-nav.show { left:0; }
+        nav {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 350px; height: 100%;
+            background: rgba(5, 5, 15, 0.98);
+            backdrop-filter: blur(30px);
+            padding: 120px 50px;
+            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 999;
+            border-left: 2px solid var(--primary);
+        }
+        nav.show { right: 0; }
+        nav ul { list-style: none; }
+        nav ul li { margin-bottom: 40px; }
+        nav ul li a {
+            text-decoration: none; color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem; font-weight: 700;
+            letter-spacing: 3px;
+        }
 
-/* Seções */
-section {
-  padding:120px 30px 60px;
-  max-width:1000px;
-  margin:0 auto;
-}
+        /* Conteúdo e Tipografia Gigante */
+        section {
+            min-height: 100vh;
+            padding: 160px 8% 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-/* Gradientes de texto */
-.gradient-azulpreto {
-  font-style:italic;
-  background: linear-gradient(45deg, #0D1B44, #000000);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom:15px;
-}
+        h1 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            font-weight: 900;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.gradient-ciano { color:#00FFFF; font-style:italic; text-align:center; }
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
 
-.gradient-cinza {
-  font-style:italic;
-  background: linear-gradient(90deg, #555555, #CCCCCC);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom:15px;
-}
+        p {
+            font-size: 1.25rem; /* Aumentado */
+            color: var(--text-dim);
+            max-width: 850px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
 
-/* Títulos */
-h1,h2 { font-size:2.5em; margin-bottom:20px; text-align:center; }
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 30px;
+            padding: 60px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
 
-/* Botões */
-.btn {
-  display:inline-block;
-  padding:12px 25px;
-  margin:10px 5px;
-  border:none;
-  border-radius:8px;
-  color:white;
-  font-weight:bold;
-  font-style:italic;
-  text-decoration:none;
-  cursor:pointer;
-  transition: all 0.3s ease;
-}
-.youtube { background:red; }
-.youtube:hover { background:#b20000; transform:scale(1.05); }
-.discord { background:purple; }
-.discord:hover { background:#6600aa; transform:scale(1.05); }
-.email { background:black; }
-.email:hover { background:#333; transform:scale(1.05); }
-.apoie { background: linear-gradient(45deg, #006400, #00FF7F); color:white; }
-.apoie:hover { transform:scale(1.05); }
+        /* Botões */
+        .btn-container { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 40px; }
+        
+        .btn {
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            text-align: center;
+        }
 
-/* Lista de projetos */
-#projetos ul { list-style:disc; padding-left:20px; }
+        .youtube { background: #ff0000; color: white; border: none; }
+        .discord { background: #5865F2; color: white; border: none; }
+        .email { border: 2px solid var(--primary); color: var(--primary); }
+        .apoie { 
+            background: linear-gradient(45deg, #00f2ff, #7000ff); 
+            color: white; 
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.3);
+            width: 100%; max-width: 300px;
+        }
 
-/* Responsividade */
-@media(max-width:768px){
-  header { padding:10px 20px; }
-  nav { width:80%; }
-  h1,h2 { font-size:2em; }
-  .btn { padding:10px 18px; font-size:14px; }
-}
+        .btn:hover { transform: scale(1.05) translateY(-5px); filter: brightness(1.2); }
 
-/* Scroll suave para links internos */
-a[href^="#"] { cursor:pointer; }
+        .fade-in { opacity: 0; transform: translateY(50px); transition: 1.2s ease-out; }
+        .fade-in.show { opacity: 1; transform: translateY(0); }
 
-/* Efeito fade-in ao rolar */
-.fade-in { opacity:0; transform:translateY(30px); transition: all 0.8s ease; }
-.fade-in.show { opacity:1; transform:translateY(0); }
-
-/* Fundo animado sutil */
-body::before{
-  content:"";
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:linear-gradient(120deg, rgba(13,27,68,0.05), rgba(0,0,0,0.05));
-  pointer-events:none;
-  z-index:-1;
-  animation: bgMove 30s linear infinite;
-}
-
-@keyframes bgMove{
-  0%{background-position:0 0;}
-  100%{background-position:100% 100%;}
-}
-</style>
+        @media (max-width: 768px) {
+            section { padding: 120px 5% 50px; }
+            .glass-card { padding: 30px; }
+            p { font-size: 1.1rem; }
+        }
+    </style>
 </head>
 <body>
 
+<div class="bg-glow"></div>
+
 <header>
-  <img src="https://i.postimg.cc/hj47FNjv/atlasdv.png" alt="Atlas DV Logo">
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <img src="https://i.postimg.cc/hj47FNjv/atlasdv.png" alt="Atlas DV Logo">
+    <div class="menu-toggle" id="toggleBtn">☰</div>
 </header>
 
 <nav id="menu">
-  <ul>
-    <li><a href="#inicial">Inicial</a></li>
-    <li><a href="#sobre">Sobre Nós</a></li>
-    <li><a href="#apoie">Apoie-nos</a></li>
-    <li><a href="#projetos">Nossos Projetos</a></li>
-  </ul>
+    <ul>
+        <li><a href="#inicial" onclick="toggleMenu()">MANIFESTO</a></li>
+        <li><a href="#sobre" onclick="toggleMenu()">NOSSA BASE</a></li>
+        <li><a href="#apoie" onclick="toggleMenu()">REVOLUÇÃO</a></li>
+    </ul>
 </nav>
 
 <section id="inicial" class="fade-in">
-  <h1 class="gradient-azulpreto">Bem-vindo à Atlas DV</h1>
-  <p class="gradient-azulpreto">
-    A Atlas DV é uma desenvolvedora independente dedicada a criar experiências digitais únicas. Nosso foco é transformar ideias em projetos interativos, desde jogos até aplicações web inovadoras, sempre com qualidade, criatividade e atenção aos detalhes.
-  </p>
-  <p class="gradient-azulpreto">
-    Explore nosso portfólio, conheça nossos projetos e acompanhe nossas novidades. Aqui, cada pixel conta e cada código tem propósito.
-  </p>
+    <h1>FORJANDO O <br> FUTURO INDIE.</h1>
+    <div class="glass-card">
+        <p>A <strong>Atlas DV</strong> não é apenas uma desenvolvedora; somos um laboratório de inovação digital focado em quebrar o status quo. Acreditamos que a tecnologia deve ser uma ponte para novas realidades, onde cada linha de código é escrita com o propósito de desafiar os limites da interatividade moderna.</p>
+        <p>Nossa missão é transformar conceitos abstratos em aplicações robustas e jogos imersivos. Aqui, a criatividade não tem amarras geográficas e o detalhismo é o nosso padrão básico. Estamos construindo um ecossistema onde a qualidade técnica e a arte narrativa caminham juntas para entregar o extraordinário.</p>
+    </div>
 </section>
 
 <section id="sobre" class="fade-in">
-  <h2 class="gradient-azulpreto">Sobre Nós</h2>
-  <p class="gradient-azulpreto">
-    A Atlas DV foi criada com o objetivo de dar visibilidade à indústria de games e plataformas independentes em regiões e países fora do eixo dos grandes centros tecnológicos. Nosso propósito é apoiar desenvolvedores e projetos que muitas vezes não têm acesso aos recursos ou ao reconhecimento que merecem.
-  </p>
-  <p class="gradient-azulpreto">
-    Fundada por Antônio Filho, natural de Belém, no Pará, a Atlas DV busca transformar ideias em experiências digitais inovadoras, promovendo criatividade, inclusão e desenvolvimento tecnológico em comunidades menos favorecidas.
-  </p>
-  <h3>Redes Sociais</h3>
-  <a href="https://youtube.com/@atlas-dv?si=lklqqwC4KBEpjvWK" target="_blank" class="btn youtube">YouTube</a>
-  <a href="https://discord.gg/STrHtum8sM" target="_blank" class="btn discord">Discord</a>
-  <a href="mailto:Atlas.dv.devgroup@gmail.com" class="btn email">E-Mail</a>
-  <p style="margin-top:10px;">De segunda a sexta, das 13h às 20h (horário de Brasília)</p>
+    <h2>Nossa Essência</h2>
+    <div class="glass-card">
+        <p>Fundada pelo visionário <strong>Antônio Filho</strong> em Belém do Pará, a Atlas DV carrega em seu DNA a resistência e a inventividade do Norte brasileiro. Surgimos da necessidade de colocar o desenvolvimento independente de regiões fora do eixo tradicional no mapa global da tecnologia.</p>
+        <p>Entendemos que existem talentos gigantes escondidos em locais onde o acesso a recursos é limitado. Por isso, a Atlas atua como um farol, desenvolvendo projetos próprios e apoiando iniciativas que trazem diversidade e frescor à indústria. Nossa atuação foca em três pilares fundamentais: Inclusão Tecnológica, Excelência Criativa e Impacto Comunitário.</p>
+        
+        <div class="btn-container">
+            <a href="https://youtube.com/@atlas-dv" target="_blank" class="btn youtube">Assista no YouTube</a>
+            <a href="https://discord.gg/STrHtum8sM" target="_blank" class="btn discord">Comunidade Discord</a>
+            <a href="mailto:Atlas.dv.devgroup@gmail.com" class="btn email">Fale Conosco</a>
+        </div>
+    </div>
 </section>
 
 <section id="apoie" class="fade-in">
-  <h2>💖 Apoie a Atlas DV</h2>
-  <p class="gradient-ciano">
-    Se você curte a nossa missão de dar visibilidade pra games e projetos indie, mesmo em lugares que ninguém olha, pode dar uma força com só <strong>R$5 💸</strong>
-  </p>
-  <p class="gradient-ciano">
-    Cada contribuição ajuda a manter a Atlas DV ativa, criando coisas novas e apoiando talentos 🎮✨
-  </p>
-  <a href="https://mpago.la/1sJ4GRL" target="_blank" class="btn apoie">Apoiar</a>
-</section>
-
-<section id="projetos" class="fade-in">
-  <h2 class="gradient-azulpreto">Nossos Projetos</h2>
-  <p class="gradient-azulpreto">A Atlas DV, atualmente apenas está desenvolvendo 2 projetos, 1 plataforma, e 1 jogo:</p>
-  <ul>
-    <li><strong style="color:purple;">Leep_p</strong> • Uma Plataforma de conversas, a o qual tem 2 camadas de proteção, perfeita para conversas particulares, e aquele grupo sagrado de amigos (Lilás)</li>
-    <li><strong class="gradient-cinza">Tonny</strong> • Um jogo 2D Monster tame roguelike, que se passa num mundo devastado após uma guerra nuclear global pelo urânio no México. A humanidade quase foi extinta, restando apenas a sociedade do bunker Santa Fé, planejado para durar 100 anos. O jogador assume o protagonista, explorando a superfície e lidando com criaturas modificadas. O jogo combina estratégia, sobrevivência e gerenciamento de monstros, com ecossistema dinâmico e combates por turnos, focando em domesticação e exploração. Atualmente contém 50 espécies diferentes, catalogadas.</li>
-  </ul>
+    <div style="text-align: center;">
+        <h2>FAÇA PARTE DA EXPANSÃO</h2>
+        <div class="glass-card">
+            <p style="text-align: center; margin: 0 auto 30px;">
+                Manter uma estrutura de desenvolvimento independente exige hardware, servidores e, acima de tudo, tempo e dedicação. O seu apoio é o combustível que nos permite continuar ignorando o óbvio e criando o inédito.
+            </p>
+            <p style="text-align: center; color: var(--primary); font-weight: 800; font-size: 1.5rem;">
+                Com apenas R$ 5,00 você financia a próxima grande ideia.
+            </p>
+            <div style="display: flex; justify-content: center; margin-top: 30px;">
+                <a href="https://mpago.la/1sJ4GRL" target="_blank" class="btn apoie">CONTRIBUIR COM A ATLAS</a>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 20px; text-align: center;">Horário de Operação: 13:00 às 20:00 (Brasília)</p>
+        </div>
+    </div>
 </section>
 
 <script>
-function toggleMenu(){
-  document.getElementById('menu').classList.toggle('show');
-}
+    const menu = document.getElementById('menu');
+    const toggleBtn = document.getElementById('toggleBtn');
 
-/* Fade-in ao rolar */
-const faders = document.querySelectorAll('.fade-in');
-window.addEventListener('scroll', () => {
-  faders.forEach(f => {
-    const rect = f.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 100){
-      f.classList.add('show');
+    function toggleMenu() {
+        menu.classList.toggle('show');
+        toggleBtn.innerHTML = menu.classList.contains('show') ? '✕' : '☰';
     }
-  });
-});
+
+    toggleBtn.addEventListener('click', toggleMenu);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('show');
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
 </body>
